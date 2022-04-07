@@ -1,0 +1,23 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: ocp-sno
+  namespace: ocp-sno
+spec:
+  baseDomain: spaz.local
+  clusterName: ocp-sno 
+  controlPlaneConfig:
+    servingCertificates: {}
+  installed: false
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: ocp-sno
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: "ocp-sno"
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

@@ -1,0 +1,6 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterImageSet
+metadata:
+  name: openshift-4.9.19
+spec:
+   releaseImage: registry.spaz.local:8443/openshift/release:4.9.19-x86_64

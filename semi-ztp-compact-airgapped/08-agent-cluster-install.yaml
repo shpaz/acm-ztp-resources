@@ -1,0 +1,21 @@
+apiVersion: extensions.hive.openshift.io/v1beta1
+kind: AgentClusterInstall
+metadata:
+  name: ocp-compact
+  namespace: ocp-compact
+spec:
+  clusterDeploymentRef:
+    name: ocp-compact
+  imageSetRef:
+    name: openshift-4.9.19
+  networking:
+    clusterNetwork:
+    - cidr: 10.128.0.0/14 
+      hostPrefix: 23
+    serviceNetwork:
+    - 172.30.0.0/16
+  apiVIP: "192.168.1.119"
+  ingressVIP: "192.168.1.120"
+  provisionRequirements:
+    controlPlaneAgents: 3
+  sshPublicKey: 'ssh-rsa ...'
