@@ -1,0 +1,17 @@
+apiVersion: agent-install.openshift.io/v1beta1
+kind: InfraEnv
+metadata:
+  name: ocp-compact
+  namespace: ocp-compact
+spec:
+  clusterRef:
+    name: ocp-compact
+    namespace: ocp-compact
+  sshAuthorizedKey: 'ssh-rsa ...'
+  agentLabels: 
+    cluster-name: ocp-compact
+  pullSecretRef:
+    name: assisted-deployment-pull-secret
+  nmStateConfigLabelSelector:
+    matchLabels:
+      cluster-name: ocp-compact

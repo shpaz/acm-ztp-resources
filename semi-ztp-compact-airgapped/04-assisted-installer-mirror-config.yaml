@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: assisted-installer-mirror-config
+  namespace: open-cluster-management
+  labels:
+    app: assisted-service
+data:
+  ca-bundle.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDwDCCAqigAwIBAgIUPjadrmxbeRVBPuSqvJFNmGIrsvUwDQYJKoZIhvcNAQEL
+    BQAwbTELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+    azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xHDAaBgNVBAMME3Jl
+    Z2lzdHJ5LnNwYXoubG9jYWwwHhcNMjIwMzMxMjI1NjE5WhcNMjUwMTE4MjI1NjE5
+    WjBtMQswCQYDVQQGEwJVUzELMAkGA1UECAwCVkExETAPBgNVBAcMCE5ldyBZb3Jr
+    MQ0wCwYDVQQKDARRdWF5MREwDwYDVQQLDAhEaXZpc2lvbjEcMBoGA1UEAwwTcmVn
+    aXN0cnkuc3Bhei5sb2NhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+    ANmNC52lKqbRthB16PYjm10QQONeefU+60AKFtkK8sWU0RFaNnvQF6lJfyEn5vZ8
+    w2tlfErDjtunubVvEOXYKjw9CRtq0mh+/oVPhpVINf5bsEDVene6WF0pMXaoLoMq
+    x4ap5Q5MW8mxGpEaGuCtBsV4KI6A3fG6AJoiO9G0v8z1JIGa42veNozx0jqUhZGq
+    dQFlG64gwtLV/r7WOkxpDZu8Fd2MSqBpOUxgnlAqlVuC38mzRRNwiZ4G70P3Bh/i
+    4C8eGTeX6oWYPuLMtJxGbogHXfrH0eT2HfSKWxotPu2dOsosavfWTjcDe8eQsRf0
+    /UPHLlpkzERjAQZBJhGxMT8CAwEAAaNYMFYwCwYDVR0PBAQDAgLkMBMGA1UdJQQM
+    MAoGCCsGAQUFBwMBMB4GA1UdEQQXMBWCE3JlZ2lzdHJ5LnNwYXoubG9jYWwwEgYD
+    VR0TAQH/BAgwBgEB/wIBATANBgkqhkiG9w0BAQsFAAOCAQEAiWbc0aW7tBemgrTp
+    PwpJ70pcBfm1mOlCPmeCZB+ujn/KQ4hZhFofe1C8sueM5ebYPsxrbbPruqoMi/Fn
+    Y5oF7DyNuDKsTDLEEukWP/5o88adiRmISlocDXxSwHpDDISRkipSdxsTFlLmnrx3
+    n/LVjFIC5nvTNdJEcPIk3315yOMBEGb4A7PbcLlDHyh44tsN0EX7Ac2VgyOvJb7a
+    TuPGmtM/AnCK+3PBWAFjCz4rPfAyS2WK0NdATVUa0Ss8QXU7/MO53G1MgKVT3r/O
+    6HwGDcG7QrWMvzdvIaE+B6DM5Kyv8Bsp89ZvXuxBxrYT4rtCGFzmpZ8sApmcSYGZ
+    kIZ7ug==
+    -----END CERTIFICATE-----
+  registries.conf: |
+    unqualified-search-registries = ["registry.access.redhat.com", "docker.io"]
+
+    [[registry]]
+      prefix = ""
+      location = "registry.redhat.io/rhacm2"
+      mirror-by-digest-only = true
+
+      [[registry.mirror]]
+        location = "registry.spaz.local:8443/rhacm2"
+
+    [[registry]]
+      prefix = ""
+      location = "registry.redhat.io/multicluster-engine"
+      mirror-by-digest-only = true
+
+      [[registry.mirror]]
+        location = "registry.spaz.local:8443/multicluster-engine"
+
+    [[registry]]
+      prefix = ""
+      location = "quay.io/openshift-release-dev/ocp-release"
+      mirror-by-digest-only = true
+
+      [[registry.mirror]]
+        location = "registry.spaz.local:8443/openshift/release"
+
+    [[registry]]
+      prefix = ""
+      location = "quay.io/openshift-release-dev/ocp-v4.0-art-dev"
+      mirror-by-digest-only = true
+
+      [[registry.mirror]]
+        location = "registry.spaz.local:8443/openshift/release"
+

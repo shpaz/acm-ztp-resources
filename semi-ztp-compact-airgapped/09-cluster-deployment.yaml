@@ -1,0 +1,23 @@
+apiVersion: hive.openshift.io/v1
+kind: ClusterDeployment
+metadata:
+  name: ocp-compact
+  namespace: ocp-compact
+spec:
+  baseDomain: spaz.local
+  clusterName: ocp-compact 
+  controlPlaneConfig:
+    servingCertificates: {}
+  installed: false
+  clusterInstallRef:
+    group: extensions.hive.openshift.io
+    kind: AgentClusterInstall
+    name: ocp-compact
+    version: v1beta1
+  platform:
+    agentBareMetal:
+      agentSelector:
+        matchLabels:
+          cluster-name: "ocp-compact"
+  pullSecretRef:
+    name: assisted-deployment-pull-secret

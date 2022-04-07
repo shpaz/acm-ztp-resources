@@ -1,0 +1,23 @@
+apiVersion: metal3.io/v1alpha1
+kind: BareMetalHost
+metadata:
+  name: ocp-sno
+  namespace: ocp-sno
+  annotations:
+    inspect.metal3.io: disabled
+  labels:
+    infraenvs.agent-install.openshift.io: "ocp-sno"
+    bmac.agent-install.openshift.io/role: "master"
+    bmac.agent-install.openshift.io/hostname: "ocp-sno"
+spec:
+  bootMode: "UEFI"
+  bmc:
+    address: redfish-virtualmedia+http://192.168.1.40:8000/redfish/v1/Systems/b146bb30-53d2-4c94-a726-502d48afe400
+    disableCertificateVerification: true
+    credentialsName: ocp-sno-bmc-secret
+  bootMACAddress: 52:54:00:13:a5:cd
+  rootDeviceHints:
+    deviceName: "/dev/sda"
+  hardwareProfile: libvirt
+  automatedCleaningMode: disabled
+  online: true
